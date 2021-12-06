@@ -38,7 +38,8 @@ class _TD1MRZFormatParser {
         MRZFieldRecognitionDefectsFixer.fixDocumentType(documentTypeRaw);
     final countryCodeFixed =
         MRZFieldRecognitionDefectsFixer.fixCountryCode(countryCodeRaw);
-    final documentNumberFixed = documentNumberRaw;
+    final documentNumberFixed =
+        MRZFieldRecognitionDefectsFixer.fixCheckDigit(documentNumberRaw);
     final documentNumberCheckDigitFixed =
         MRZFieldRecognitionDefectsFixer.fixCheckDigit(
             documentNumberCheckDigitRaw);
@@ -62,23 +63,23 @@ class _TD1MRZFormatParser {
     final documentNumberIsValid = int.tryParse(documentNumberCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(documentNumberFixed);
 
-    if (!documentNumberIsValid) {
-      throw const InvalidDocumentNumberException();
-    }
+    // if (!documentNumberIsValid) {
+    //   throw const InvalidDocumentNumberException();
+    // }
 
     final birthDateIsValid = int.tryParse(birthDateCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(birthDateFixed);
 
-    if (!birthDateIsValid) {
-      throw const InvalidBirthDateException();
-    }
+    // if (!birthDateIsValid) {
+    //   throw const InvalidBirthDateException();
+    // }
 
     final expiryDateIsValid = int.tryParse(expiryDateCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(expiryDateFixed);
 
-    if (!expiryDateIsValid) {
-      throw const InvalidExpiryDateException();
-    }
+    // if (!expiryDateIsValid) {
+    //   throw const InvalidExpiryDateException();
+    // }
 
     final finalCheckStringFixed =
         '$documentNumberFixed$documentNumberCheckDigitFixed'
@@ -89,9 +90,9 @@ class _TD1MRZFormatParser {
     final finalCheckStringIsValid = int.tryParse(finalCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(finalCheckStringFixed);
 
-    if (!finalCheckStringIsValid) {
-      throw const InvalidMRZValueException();
-    }
+    // if (!finalCheckStringIsValid) {
+    //   throw const InvalidMRZValueException();
+    // }
 
     final documentType = MRZFieldParser.parseDocumentType(documentTypeFixed);
     final countryCode = MRZFieldParser.parseCountryCode(countryCodeFixed);
@@ -99,7 +100,7 @@ class _TD1MRZFormatParser {
         MRZFieldParser.parseDocumentNumber(documentNumberFixed);
     final optionalData = MRZFieldParser.parseOptionalData(optionalDataFixed);
     final birthDate = MRZFieldParser.parseBirthDate(birthDateFixed);
-    final sex = MRZFieldParser.parseSex(sexFixed);
+    final sex = sexFixed;
     final expiryDate = MRZFieldParser.parseExpiryDate(expiryDateFixed);
     final nationality = MRZFieldParser.parseNationality(nationalityFixed);
     final optionalData2 = MRZFieldParser.parseOptionalData(optionalData2Fixed);
@@ -117,6 +118,12 @@ class _TD1MRZFormatParser {
       expiryDate: expiryDate,
       personalNumber: optionalData,
       personalNumber2: optionalData2,
+      validity: MRZValidity(
+        documentNumber: documentNumberIsValid,
+        birthDate: birthDateIsValid,
+        expirityDate: expiryDateIsValid,
+        finalString: finalCheckStringIsValid,
+      ),
     );
   }
 }

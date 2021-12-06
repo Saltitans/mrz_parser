@@ -12,7 +12,8 @@ class MRZFieldRecognitionDefectsFixer {
   static String fixDate(String input) =>
       input.replaceSimilarLettersWithDigits();
 
-  static String fixSex(String input) => input.replaceAll('P', 'F');
+  static String fixSex(String input) =>
+      input.replaceSimilarLettersWithLetters();
 
   static String fixCountryCode(String input) =>
       input.replaceSimilarDigitsWithLetters();

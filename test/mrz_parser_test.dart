@@ -1,4 +1,5 @@
 import 'package:mrz_parser/mrz_parser.dart';
+import 'package:mrz_parser/src/mrz_validity.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -102,10 +103,11 @@ void main() {
                 documentNumber: '59000002',
                 nationalityCountryCode: 'SWE',
                 birthDate: DateTime(1987, 03, 14),
-                sex: Sex.male,
+                sex: 'M',
                 expiryDate: DateTime(2017, 01, 02),
                 personalNumber: '198703142391',
                 personalNumber2: '',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -166,10 +168,11 @@ void main() {
                 documentNumber: 'C01X00T47',
                 nationalityCountryCode: 'D',
                 birthDate: DateTime(1964, 08, 12),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2027, 02, 28),
                 personalNumber: '',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -188,10 +191,11 @@ void main() {
                 documentNumber: 'C01X00',
                 nationalityCountryCode: 'D',
                 birthDate: DateTime(1964, 08, 12),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2027, 02, 28),
                 personalNumber: '',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -248,10 +252,11 @@ void main() {
                 documentNumber: '0005467',
                 nationalityCountryCode: 'RUS',
                 birthDate: DateTime(1970, 01, 01),
-                sex: Sex.male,
+                sex: 'M',
                 expiryDate: DateTime(2011, 11, 01),
                 personalNumber: 'M901101',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -299,10 +304,11 @@ void main() {
                 documentNumber: 'L898902C3',
                 nationalityCountryCode: 'UTO',
                 birthDate: DateTime(1974, 08, 12),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2012, 04, 15),
                 personalNumber: 'ZE184226B',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -321,10 +327,11 @@ void main() {
                 documentNumber: 'L4041765',
                 nationalityCountryCode: 'AUS',
                 birthDate: DateTime(1982, 11, 16),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2013, 05, 21),
                 personalNumber: '',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -343,10 +350,11 @@ void main() {
                 documentNumber: 'D23145890',
                 nationalityCountryCode: 'UTO',
                 birthDate: DateTime(1974, 08, 12),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2012, 04, 15),
                 personalNumber: '',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -412,10 +420,11 @@ void main() {
                 documentNumber: '12345678',
                 nationalityCountryCode: 'KOR',
                 birthDate: DateTime(1950, 01, 01),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2013, 04, 07),
                 personalNumber: 'B3SE000IL4243934',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -463,10 +472,11 @@ void main() {
                 documentNumber: '880692310285',
                 nationalityCountryCode: 'FRA',
                 birthDate: DateTime(1965, 12, 06),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(1998, 06, 01),
                 personalNumber: '',
                 personalNumber2: '923',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -485,10 +495,11 @@ void main() {
                 documentNumber: '880692310285',
                 nationalityCountryCode: 'FRA',
                 birthDate: DateTime(1965, 12, 06),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(1998, 06, 01),
                 personalNumber: '923255',
                 personalNumber2: '923',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -507,10 +518,11 @@ void main() {
                 documentNumber: '970675K00277',
                 nationalityCountryCode: 'FRA',
                 birthDate: DateTime(1973, 03, 21),
-                sex: Sex.male,
+                sex: 'M',
                 expiryDate: DateTime(2007, 06, 01),
                 personalNumber: '',
                 personalNumber2: '75K',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -529,10 +541,11 @@ void main() {
                 documentNumber: '880692310285',
                 nationalityCountryCode: 'FRA',
                 birthDate: DateTime(1965, 12, 06),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(1998, 06, 01),
                 personalNumber: '',
                 personalNumber2: '923',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -551,10 +564,11 @@ void main() {
                 documentNumber: '150692310285',
                 nationalityCountryCode: 'FRA',
                 birthDate: DateTime(1965, 12, 06),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2030, 06, 01),
                 personalNumber: '',
                 personalNumber2: '923',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -573,10 +587,11 @@ void main() {
                 documentNumber: '150692310285',
                 nationalityCountryCode: 'FRA',
                 birthDate: DateTime(2000, 12, 06),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2025, 06, 01),
                 personalNumber: '',
                 personalNumber2: '923',
+                validity: const MRZValidity(),
               ),
             ));
 
@@ -627,10 +642,11 @@ void main() {
                 documentNumber: '12345678',
                 nationalityCountryCode: 'KOR',
                 birthDate: DateTime(1950, 01, 01),
-                sex: Sex.female,
+                sex: 'F',
                 expiryDate: DateTime(2013, 04, 07),
                 personalNumber: 'B3SE000IL4243934',
                 personalNumber2: null,
+                validity: const MRZValidity(),
               ),
             ));
   });

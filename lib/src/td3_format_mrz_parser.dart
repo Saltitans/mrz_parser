@@ -31,15 +31,16 @@ class _TD3MRZFormatParser {
     final expiryDateRaw = secondLine.substring(21, 27);
     final expiryDateCheckDigitRaw = secondLine[27];
     final optionalDataRaw = secondLine.substring(28, isVisaDocument ? 44 : 42);
-    final optionalDataCheckDigitRaw = isVisaDocument ? null : secondLine[42];
-    final finalCheckDigitRaw = isVisaDocument ? null : secondLine.substring(43);
+    // final optionalDataCheckDigitRaw = isVisaDocument ? null : secondLine[42];
+    // final finalCheckDigitRaw = isVisaDocument ? null : secondLine.substring(43);
 
     final documentTypeFixed =
         MRZFieldRecognitionDefectsFixer.fixDocumentType(documentTypeRaw);
     final countryCodeFixed =
         MRZFieldRecognitionDefectsFixer.fixCountryCode(countryCodeRaw);
     final namesFixed = MRZFieldRecognitionDefectsFixer.fixNames(namesRaw);
-    final documentNumberFixed = documentNumberRaw;
+    final documentNumberFixed =
+        MRZFieldRecognitionDefectsFixer.fixCheckDigit(documentNumberRaw);
     final documentNumberCheckDigitFixed =
         MRZFieldRecognitionDefectsFixer.fixCheckDigit(
             documentNumberCheckDigitRaw);
@@ -55,60 +56,60 @@ class _TD3MRZFormatParser {
     final expiryDateCheckDigitFixed =
         MRZFieldRecognitionDefectsFixer.fixCheckDigit(expiryDateCheckDigitRaw);
     final optionalDataFixed = optionalDataRaw;
-    final optionalDataCheckDigitFixed = optionalDataCheckDigitRaw != null
-        ? MRZFieldRecognitionDefectsFixer.fixCheckDigit(
-            optionalDataCheckDigitRaw)
-        : null;
-    final finalCheckDigitFixed = finalCheckDigitRaw != null
-        ? MRZFieldRecognitionDefectsFixer.fixCheckDigit(finalCheckDigitRaw)
-        : null;
+    // final optionalDataCheckDigitFixed = optionalDataCheckDigitRaw != null
+    //     ? MRZFieldRecognitionDefectsFixer.fixCheckDigit(
+    //         optionalDataCheckDigitRaw)
+    //     : null;
+    // final finalCheckDigitFixed = finalCheckDigitRaw != null
+    //     ? MRZFieldRecognitionDefectsFixer.fixCheckDigit(finalCheckDigitRaw)
+    //     : null;
 
     final documentNumberIsValid = int.tryParse(documentNumberCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(documentNumberFixed);
 
-    if (!documentNumberIsValid) {
-      throw const InvalidDocumentNumberException();
-    }
+    // if (!documentNumberIsValid) {
+    //   throw const InvalidDocumentNumberException();
+    // }
 
     final birthDateIsValid = int.tryParse(birthDateCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(birthDateFixed);
 
-    if (!birthDateIsValid) {
-      throw const InvalidBirthDateException();
-    }
+    // if (!birthDateIsValid) {
+    //   throw const InvalidBirthDateException();
+    // }
 
     final expiryDateIsValid = int.tryParse(expiryDateCheckDigitFixed) ==
         MRZCheckDigitCalculator.getCheckDigit(expiryDateFixed);
 
-    if (!expiryDateIsValid) {
-      throw const InvalidExpiryDateException();
-    }
+    // if (!expiryDateIsValid) {
+    //   throw const InvalidExpiryDateException();
+    // }
 
-    if (optionalDataCheckDigitFixed != null) {
-      final optionalDataIsValid = (int.tryParse(optionalDataCheckDigitFixed) ==
-              MRZCheckDigitCalculator.getCheckDigit(optionalDataFixed)) ||
-          ((optionalDataCheckDigitFixed == '<') &&
-              MRZFieldParser.parseOptionalData(optionalDataFixed).isEmpty);
+    // if (optionalDataCheckDigitFixed != null) {
+    //   final optionalDataIsValid = (int.tryParse(optionalDataCheckDigitFixed) ==
+    //           MRZCheckDigitCalculator.getCheckDigit(optionalDataFixed)) ||
+    //       ((optionalDataCheckDigitFixed == '<') &&
+    //           MRZFieldParser.parseOptionalData(optionalDataFixed).isEmpty);
 
-      if (!optionalDataIsValid) {
-        throw const InvalidOptionalDataException();
-      }
-    }
+    //   if (!optionalDataIsValid) {
+    //     throw const InvalidOptionalDataException();
+    //   }
+    // }
 
-    if (finalCheckDigitFixed != null) {
-      final finalCheckStringFixed =
-          '$documentNumberFixed$documentNumberCheckDigitFixed'
-          '$birthDateFixed$birthDateCheckDigitFixed'
-          '$expiryDateFixed$expiryDateCheckDigitFixed'
-          '$optionalDataFixed${optionalDataCheckDigitFixed ?? ''}';
+    // if (finalCheckDigitFixed != null) {
+    //   final finalCheckStringFixed =
+    //       '$documentNumberFixed$documentNumberCheckDigitFixed'
+    //       '$birthDateFixed$birthDateCheckDigitFixed'
+    //       '$expiryDateFixed$expiryDateCheckDigitFixed'
+    //       '$optionalDataFixed${optionalDataCheckDigitFixed ?? ''}';
 
-      final finalCheckStringIsValid = int.tryParse(finalCheckDigitFixed) ==
-          MRZCheckDigitCalculator.getCheckDigit(finalCheckStringFixed);
+    //   final finalCheckStringIsValid = int.tryParse(finalCheckDigitFixed) ==
+    //       MRZCheckDigitCalculator.getCheckDigit(finalCheckStringFixed);
 
-      if (!finalCheckStringIsValid) {
-        throw const InvalidMRZValueException();
-      }
-    }
+    //   if (!finalCheckStringIsValid) {
+    //     throw const InvalidMRZValueException();
+    //   }
+    // }
 
     final documentType = MRZFieldParser.parseDocumentType(documentTypeFixed);
     final countryCode = MRZFieldParser.parseCountryCode(countryCodeFixed);
@@ -117,7 +118,7 @@ class _TD3MRZFormatParser {
         MRZFieldParser.parseDocumentNumber(documentNumberFixed);
     final nationality = MRZFieldParser.parseNationality(nationalityFixed);
     final birthDate = MRZFieldParser.parseBirthDate(birthDateFixed);
-    final sex = MRZFieldParser.parseSex(sexFixed);
+    final sex = sexFixed;
     final expiryDate = MRZFieldParser.parseExpiryDate(expiryDateFixed);
     final optionalData = MRZFieldParser.parseOptionalData(optionalDataFixed);
 
@@ -133,6 +134,11 @@ class _TD3MRZFormatParser {
       expiryDate: expiryDate,
       personalNumber: optionalData,
       personalNumber2: null,
+      validity: MRZValidity(
+        documentNumber: documentNumberIsValid,
+        birthDate: birthDateIsValid,
+        expirityDate: expiryDateIsValid,
+      ),
     );
   }
 }

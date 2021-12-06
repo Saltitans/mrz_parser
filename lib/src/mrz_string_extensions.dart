@@ -34,4 +34,7 @@ extension _MRZStringExtensions on String {
       .replaceAll('B', '8');
 
   String replaceAngleBracketsWithSpaces() => replaceAll('<', ' ');
+
+  String replaceSimilarLettersWithLetters() =>
+      replaceAll('P', 'F').replaceAll('H', 'M');
 }

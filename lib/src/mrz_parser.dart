@@ -2,6 +2,7 @@ library mrz_parser;
 
 import 'mrz_exceptions.dart';
 import 'mrz_result.dart';
+import 'mrz_validity.dart';
 
 part 'mrz_checkdigit_calculator.dart';
 part 'mrz_field_parser.dart';

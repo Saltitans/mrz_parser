@@ -65,10 +65,10 @@ void main() {
     expect(MRZFieldParser.parseOptionalData('<<<<<'), '');
   });
 
-  test('parses sex', () {
-    expect(MRZFieldParser.parseSex('M'), Sex.male);
-    expect(MRZFieldParser.parseSex('F'), Sex.female);
-    expect(MRZFieldParser.parseSex('<'), Sex.none);
-    expect(MRZFieldParser.parseSex('<<<<<'), Sex.none);
-  });
+  // test('parses sex', () {
+  //   expect(MRZFieldParser.parseSex('M'), Sex.male);
+  //   expect(MRZFieldParser.parseSex('F'), Sex.female);
+  //   expect(MRZFieldParser.parseSex('<'), Sex.none);
+  //   expect(MRZFieldParser.parseSex('<<<<<'), Sex.none);
+  // });
 }

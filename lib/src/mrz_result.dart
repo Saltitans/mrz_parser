@@ -1,4 +1,4 @@
-enum Sex { none, male, female }
+import 'mrz_validity.dart';
 
 class MRZResult {
   const MRZResult({
@@ -13,6 +13,7 @@ class MRZResult {
     required this.expiryDate,
     required this.personalNumber,
     this.personalNumber2,
+    required this.validity,
   });
 
   final String documentType;
@@ -22,10 +23,11 @@ class MRZResult {
   final String documentNumber;
   final String nationalityCountryCode;
   final DateTime birthDate;
-  final Sex sex;
+  final String sex;
   final DateTime expiryDate;
   final String personalNumber;
   final String? personalNumber2;
+  final MRZValidity validity;
 
   @override
   bool operator ==(Object other) =>
@@ -42,7 +44,8 @@ class MRZResult {
           sex == other.sex &&
           expiryDate == other.expiryDate &&
           personalNumber == other.personalNumber &&
-          personalNumber2 == other.personalNumber2;
+          personalNumber2 == other.personalNumber2 &&
+          validity == other.validity;
 
   @override
   int get hashCode =>
@@ -56,5 +59,6 @@ class MRZResult {
       sex.hashCode ^
       expiryDate.hashCode ^
       personalNumber.hashCode ^
-      personalNumber2.hashCode;
+      personalNumber2.hashCode ^
+      validity.hashCode;
 }
